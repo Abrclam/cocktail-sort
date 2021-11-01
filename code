@@ -1,0 +1,68 @@
+#include <iostream>
+using namespace std;
+#include <random>
+
+
+
+void Sort(int sort[], int n)
+{
+    bool flip = true;
+    int start = 0;
+    int end = n - 1;
+
+    while (flip)
+    {
+
+        flip = false;
+        for (int i = start; i < end; ++i)
+        {
+            if (sort[i] > sort[i + 1]) {
+                swap(sort[i], sort[i + 1]);
+                flip = true;
+            }
+            else if(sort[i] == sort[i + 1]) {
+                swap(sort[i], sort[i + 1]);
+                flip = true;
+            }
+        }
+        if (!flip)
+            break;
+        flip = false;
+        --end;
+        for (int i = end - 1; i >= start; --i)
+        {
+            if (sort[i] > sort[i + 1]) {
+                swap(sort[i], sort[i + 1]);
+                flip = true;
+            }
+            else if (sort[i] == sort[i + 1]) {
+                swap(sort[i], sort[i + 1]);
+                flip = true;
+            }
+        }
+        ++start;
+    }
+}
+void printArray(int sort[], int half)
+{
+    for (int i = 0; i < half; i++)
+        cout << sort[i] << endl;
+   
+}
+int main(){
+    const int size = 100;
+
+    int sort[size];
+
+    for (int I = 0; I < 100; I++)
+    {
+
+        sort[I] = rand() % 101;
+    }
+   
+    int half = sizeof(sort) / sizeof(sort[0]);
+    Sort(sort, half);
+    cout << "Array sorted: "<<endl;
+    printArray(sort, half);
+
+}
